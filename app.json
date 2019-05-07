@@ -1,0 +1,24 @@
+{
+  "pages": [
+    "page/index/index",
+    "page/index/main",
+    "page/index/addTrain/addTrain"
+  ],
+  "window": {
+    "enableWK": "YES",
+    "enableDSL": true,
+    "defaultTitle": "新天人资",
+    "backgroundColor": "#F5F5F9",
+    "pullRefresh": false,
+    "allowsBounceVertical": true
+  },
+  "tabBar": {
+    "textColor": "#404040",
+    "selectedColor": "#108ee9",
+    "backgroundColor": "#F5F5F9",
+    "items": [
+      
+    ]
+  },
+  "debug": true
+}

@@ -1,0 +1,93 @@
+.viewbody{
+  padding-top: 10px;
+  background-color:
+}
+.topimg{
+  margin: -80px 0px -90px 0;
+  width: 100%;
+}
+.formview{
+  margin-bottom: 30rpx;
+}
+.viewbody{
+  margin-bottom: 15rpx;
+}
+.viewbody .title{
+ font-family: '华文隶书';
+  font-size: 22px;
+  color: red;
+  text-align: center
+}
+.login{
+  display: flex;
+  align-items: center;
+  
+  height: 88rpx;
+  align-items: center;
+}
+.login .type{
+  margin:5px 10px 5px 20px;
+  font-family: '华文楷体';
+  
+  width: 130rpx;
+  font-size: 34rpx;
+  margin-right: 10rpx;
+  text-align: left;
+  color: #000;
+
+}
+.login .typepw{
+  margin:5px 10px 5px 20px;
+  font-family: '华文楷体';
+  
+  width: 130rpx;
+  font-size: 34rpx;
+  margin-right: 10rpx;
+  text-align: left;
+  color: #000;
+  letter-spacing: 9px;
+}
+
+.logintype{
+  margin:5px 10px 5px 20px;
+  font-family: '华文楷体';
+  font-size: 18px;
+}
+.logintypepw{
+  margin:5px 10px 5px 20px;
+  font-family: '华文楷体';
+  font-size: 18px;
+  letter-spacing: 9px;
+}
+.button-group{
+  text-align: center;
+  vertical-align:middle;
+}
+.button-group .btn{
+  height: 30px;
+  letter-spacing: 5px;
+  margin: 0 20px;
+  padding-left: 10px;
+  border: solid 3px #d3f1eb;
+  border-radius: 6px;
+}
+.form-row {
+  display: flex;
+  align-items: center;
+  padding: 0 30rpx;
+  height: 88rpx;
+  align-items: center;
+}
+
+.form-row-label {
+  width: 180rpx;
+  font-size: 34rpx;
+  margin-right: 10rpx;
+  text-align: left;
+  color: #000;
+}
+
+.form-row-content {
+  flex: 1;
+  font-size: 34rpx;
+}
