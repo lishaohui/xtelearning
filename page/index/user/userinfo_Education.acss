@@ -1,0 +1,16 @@
+.table{
+  border: 1px solid #ccc;
+  display:flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.table > view{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: #49a9ee;
+}
+.table > view + view{
+  border-left: 1px solid #ccc;
+}

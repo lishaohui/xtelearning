@@ -1,0 +1,18 @@
+  <view class="form-row-content" > 
+      人员名称:  {{globalUserJobName}}
+
+     </view>
+  
+  <view class="table" hidden="{{hideList}}">
+    <view>部门</view>   
+    <view>岗位</view>
+    <view>职务</view>
+  </view>
+  <view a:for="{{userjobList}}">
+    <view class="table">
+      <view>{{item.company}}</view>
+      <view>{{item.department}}</view>
+      <view>{{item.positionname}}</view>
+    </view>
+  </view>
+<button type="primary" size="" onTap="navigateback"> 返回 </button>

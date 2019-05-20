@@ -3,28 +3,53 @@ let url = app.globalData.url;
 
 Page({
   data:{
-    userId:''
-  },
-  onLoad(options){
-    let _this = this;
-    let userId = options.userId;
-    dd.alert({content:userId});
-    dd.httpRequest({
+     trainInfoList:[]
+      
+    },
+    onLoad(e){
+
+        let _this = this;
+        let userId = e.userId;
+       
+       
+        dd.httpRequest({
         method:'POST',
         url: url+"/deptUserinfoEducation.do",
         datatype: "json",
         data:{
-          userId:userId
+          userId:e.userId,
         },
         success:(res) => {
-          console.log("-----",res.data);
+          console.log("success",res)
+          let resultList =res.data;
+          for(var i = 0; i < resultList.length; i++){
+            this.setData({
+            trainInfoList:_this.data.trainInfoList.concat(resultList[i]),
+            })
+          }
+          this.setData({
+            hideList:false
+          })
+  
+
         },
         fail: (err)=>{
-          dd.alert({content: "fail"});
+                dd.alert({content: "fail"});
         },
         error:function(msg){
+          alert("json异常:"+msg);
         }
-      });
-  },
 
+      });
+
+        
+      
+       
+
+
+        
+    },
+    
+
+    
 })

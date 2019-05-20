@@ -1,1 +1,93 @@
-<view>1111111111111</view>
+<view class="table" hidden="{{hideList}}">
+  <view>姓名</view>
+  <view a:for="{{trainInfoList}}">
+     <view>{{item.username}}</view>
+    </view>
+</view>
+
+<view class="table" hidden="{{hideList}}">
+  <view>毕业院校</view>
+  <view a:for="{{trainInfoList}}">
+     <view>{{item.school}}</view>
+    </view>
+</view>
+
+<view class="table" hidden="{{hideList}}">
+  <view>院系</view>
+  <view a:for="{{trainInfoList}}">
+     <view>{{item.depart}}</view>
+    </view>
+</view>
+
+<view class="table" hidden="{{hideList}}">
+  <view>专业</view>
+  <view a:for="{{trainInfoList}}">
+     <view>{{item.major}}</view>
+    </view>
+</view>
+
+<view class="table" hidden="{{hideList}}">
+  <view>学历类型</view>
+  <view a:for="{{trainInfoList}}">
+     <view>{{item.diploma_type}}</view>
+    </view>
+</view>
+
+<view class="table" hidden="{{hideList}}">
+  <view>学历</view>
+  <view a:for="{{trainInfoList}}">
+     <view>{{item.diploma}}</view>
+    </view>
+</view>
+
+<view class="table" hidden="{{hideList}}">
+  <view>学位</view>
+  <view a:for="{{trainInfoList}}">
+     <view>{{item.degree}}</view>
+    </view>
+</view>
+
+<view class="table" hidden="{{hideList}}">
+  <view>学制</view>
+  <view a:for="{{trainInfoList}}">
+     <view>{{item.schoollength}}</view>
+    </view>
+</view>
+
+
+<view class="table" hidden="{{hideList}}">
+  <view>入学日期</view>
+  <view a:for="{{trainInfoList}}">
+     <view>{{item.entrance_date}}</view>
+    </view>
+</view>
+
+<view class="table" hidden="{{hideList}}">
+  <view>毕业日期</view>
+  <view a:for="{{trainInfoList}}">
+     <view>{{item.graduate_date}}</view>
+    </view>
+</view>
+
+<view class="table" hidden="{{hideList}}">
+  <view>毕业证书编号</view>
+  <view a:for="{{trainInfoList}}">
+     <view>{{item.diploma_num}}</view>
+    </view>
+</view>
+
+
+<view class="table" hidden="{{hideList}}">
+  <view>学位证书编号</view>
+  <view a:for="{{trainInfoList}}">
+     <view>{{item.degree_num}}</view>
+    </view>
+</view>
+
+
+<view class="table" hidden="{{hideList}}">
+  <view>是否最高学位</view>
+  <view a:for="{{trainInfoList}}">
+     <view>{{item.is_highest}}</view>
+    </view>
+</view>

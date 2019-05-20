@@ -25,6 +25,6 @@
     <view>{{item.userName}}</view>
     <view>{{item.userSex}}</view>
     <view>{{item.userAge}}</view>
-    <view onTap="userDetail" data-value="{{item.userId}}">详情<image class="toRight" src='../images/toRight.jpg'></image></view>
+    <view onTap="userDetail" data-value="{{item.userId}}" data-name="{{item.userName}}">详情<image class="toRight" src='../images/toRight.jpg'></image></view>
   </view>
 </view>
