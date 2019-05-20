@@ -4,7 +4,7 @@
     "page/index/main",
     "page/index/addTrain/addTrain",
     "page/index/user/deptUserInfo",
-    "page/index/user/userinfo_education"
+    "page/index/user/userinfo_Education"
 
   ],
   "window": {

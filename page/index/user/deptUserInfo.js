@@ -75,7 +75,7 @@ Page({
     },
     userDetail(e){
       var userId = e.currentTarget.dataset.value;
-      dd.navigateTo({ url: '/page/index/user/userinfo_education?userId='+userId })
+      dd.navigateTo({ url: '/page/index/user/userinfo_Education?userId='+userId })
     }
  
 })
