@@ -77,7 +77,8 @@ Page({
       var userId = e.currentTarget.dataset.value;
       var name = e.currentTarget.dataset.name;
       //dd.navigateTo({ url: '/page/index/user/userinfo_Education?userId='+userId })
-      dd.navigateTo({ url: '/page/index/user/userinfo_Job?userId='+userId+'&name='+name })
+      //dd.navigateTo({ url: '/page/index/user/userinfo_Job?userId='+userId+'&name='+name })
+      dd.navigateTo({ url: '/page/index/user/userinfo_ProSkillPosition?userId='+userId })
     }
  
 })

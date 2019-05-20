@@ -5,7 +5,8 @@
     "page/index/addTrain/addTrain",
     "page/index/user/deptUserInfo",
     "page/index/user/userinfo_Education",
-    "page/index/user/userinfo_Job"
+    "page/index/user/userinfo_Job",
+    "page/index/user/userinfo_ProSkillPosition"
 
   ],
   "window": {
