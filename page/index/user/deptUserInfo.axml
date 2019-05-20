@@ -1,0 +1,30 @@
+<view class='list-dept'>
+    <view class="form-row-label">请选择：</view>
+<!--下拉框  -->
+    <view class='list-dept-select' onTap='ShowDept'>
+        <text>{{department}}</text>
+        <image style='height:30rpx;width:30rpx;' src='../images/down.jpg'></image>
+    </view>
+
+<!-- 下拉需要显示的列表 -->
+    <view class="select_box">
+      <view a:for="{{deptList}}" a:if="{{select}}">
+        <view class="select_one" onTap="mySelect" data-name="{{item.name}}" data-value="{{item.id}}">{{item.name}}</view>
+      </view>  
+    </view>
+</view>
+
+<view class="table" style="margin-top:10rpx" hidden="{{hideList}}">
+  <view>姓名</view>
+  <view>性别</view>   
+  <view>年龄</view>
+  <view>更多信息</view>
+</view>
+<view a:for="{{deptUserList}}">
+  <view class="table">
+    <view>{{item.userName}}</view>
+    <view>{{item.userSex}}</view>
+    <view>{{item.userAge}}</view>
+    <view onTap="userDetail" data-value="{{item.userId}}">详情<image class="toRight" src='../images/toRight.jpg'></image></view>
+  </view>
+</view>

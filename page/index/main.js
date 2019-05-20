@@ -11,10 +11,9 @@ Page({
         hideList: true,
         trainInfoList:[],
     },
-    onLoad(){
+    onLoad(options){
 
         let _this = this;
-
         dd.getStorage({
           key:'storageDBUserId',
           success(res){
@@ -48,7 +47,13 @@ Page({
     navigateTo(){
       dd.navigateTo({ url: '/page/index/addTrain/addTrain' })
     },
+    DeptUserQuery(){
+      dd.navigateTo({ url: '/page/index/user/deptUserInfo' })
+    },
     trainQuery(){
+      this.setData({
+        trainInfoList:[]
+      })
       dd.httpRequest({
         method:'POST',
         url: url+"/query.do",

@@ -1,6 +1,7 @@
 <view>{{globalDBUserName}},欢迎登录人资系统钉钉小程序</view>
 <button type="primary" size="" onTap="trainQuery"> 查询最近10条培训记录 </button>
 <button type="primary" onTap="navigateTo">添加培训申请</button>
+<button type="primary" onTap="DeptUserQuery">查询部门人员信息</button>
 <button type="primary" onTap="removeStorage">退出人资系统</button>
 
 <view class="table" hidden="{{hideList}}">
