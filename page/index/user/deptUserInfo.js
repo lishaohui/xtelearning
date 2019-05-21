@@ -2,14 +2,41 @@ let app = getApp();
 let url = app.globalData.url;
 
 Page({
-    data: {
-      select: false,
-      department: '部门列表',
-      deptList:[],
-      deptUserList:[],
-      deptId:'',
-      hideList: true,
-    },
+  data: {
+    select: false,
+    department: '部门列表',
+    deptList:[],
+    deptUserList:[],
+    deptId:'',
+    hideList: true,
+    userId:'',
+    userName:'',
+    animMaskData: [],
+    animContentData: [],
+    hidden: true,
+    list: [
+      {
+        title: '教育经历信息',
+        entitle: 'Education',
+      },
+      {
+        title: '职业资格信息',
+        entitle: 'ProQualification',
+      },
+      {
+        title: '专业技术职务信息',
+        entitle: 'ProSkillPosition',
+      },
+      {
+        title: '工作经历信息',
+        entitle: 'Job',
+      },
+      {
+        title: '合同信息',
+        entitle: 'Contract',
+      },
+    ],
+  },
     onLoad() {
       let _this = this;
       dd.httpRequest({
@@ -73,12 +100,70 @@ Page({
       });
 
     },
-    userDetail(e){
+
+    ForMoreInformation(e) {
       var userId = e.currentTarget.dataset.value;
-      var name = e.currentTarget.dataset.name;
-      //dd.navigateTo({ url: '/page/index/user/userinfo_Education?userId='+userId })
-      //dd.navigateTo({ url: '/page/index/user/userinfo_Job?userId='+userId+'&name='+name })
-      dd.navigateTo({ url: '/page/index/user/userinfo_ProSkillPosition?userId='+userId })
-    }
+      var userName = e.currentTarget.dataset.name;
+      this.setData({
+        hidden: !this.data.hidden,
+        userId:userId,
+        userName:userName,
+      });
+      this.createMaskShowAnim();
+      this.createContentShowAnim();
+    
+    },
+    onChildItemTap(e) {
+      const { page } = e.currentTarget.dataset;
+      dd.navigateTo({
+        url: "userinfo_"+`${page}`+'?userId='+this.data.userId+'&name='+this.data.userName,
+      });
+    },
+    onModalCloseTap() {
+      this.createMaskHideAnim();
+      this.createContentHideAnim();
+      setTimeout(() => {
+        this.setData({
+          hidden: true,
+        });
+      }, 210);
+    },
+    createMaskShowAnim() {
+      const animation = dd.createAnimation({
+        duration: 200,
+        timingFunction: 'cubic-bezier(.55, 0, .55, .2)',
+      });
+
+      this.maskAnim = animation;
+  
+      animation.opacity(1).step();
+      this.setData({
+        animMaskData: animation.export(),
+      });
+    },
+    createMaskHideAnim() {
+      this.maskAnim.opacity(0).step();
+      this.setData({
+        animMaskData: this.maskAnim.export(),
+      });
+    },
+    createContentShowAnim() {
+      const animation = dd.createAnimation({
+        duration: 200,
+        timingFunction: 'cubic-bezier(.55, 0, .55, .2)',
+      });  
+      this.contentAnim = animation;  
+      animation.translateY(0).step();
+      this.setData({
+        animContentData: animation.export(),
+      });
+    },
+    createContentHideAnim() {
+      this.contentAnim.translateY('100%').step();
+      this.setData({
+        animContentData: this.contentAnim.export(),
+      });
+    },
+    
  
 })

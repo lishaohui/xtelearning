@@ -25,6 +25,40 @@
     <view>{{item.userName}}</view>
     <view>{{item.userSex}}</view>
     <view>{{item.userAge}}</view>
-    <view onTap="userDetail" data-value="{{item.userId}}" data-name="{{item.userName}}">详情<image class="toRight" src='../images/toRight.jpg'></image></view>
+    <view onTap="ForMoreInformation" data-value="{{item.userId}}" data-name="{{item.userName}}">详情<image class="toRight" src='../images/toRight.jpg'></image></view>
   </view>
 </view>
+
+
+<template name="items">
+    <view class="modal" a:if="{{!hidden}}" key="modal">
+        <view class="modal-mask" animation="{{animMaskData}}"/>
+        <view class="modal-container" animation="{{animContentData}}">
+            <view class="modal-close" onTap="onModalCloseTap">×</view>
+            <view class="modal-content">
+                <view class="grid-child">
+                    <view class="grid-child-title">
+                        <text class="c-title">详细信息</text>
+                    </view>
+                    <view class="grid-child-entitle">
+                        <text class="c-entitle">More Information</text>
+                    </view>
+                    <view class="clist">
+                        <view a:for="{{list}}" class="clist-item" data-page="{{item.entitle}}" onTap="onChildItemTap" a:if="{{!item.hidden}}">
+                            <view class="clist-item-content">
+                                <text class="clist-item-content-title">{{item.title}}</text>
+                                <text class="clist-item-content-subtitle">{{item.entitle}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<template
+        is="items"
+        key="items"
+        data="{{hidden: hidden, list:list, onChildItemTap:onChildItemTap, animMaskData, animContentData}}"
+/>
