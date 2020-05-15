@@ -1,0 +1,19 @@
+<view style="text-align:center"><label class="worklog_title">工作日志填报</label></view>
+<view class="table" style="margin-top:10px">
+  <view style="flex:1">姓名</view>
+  <view style="flex:2">{{globalDBUserName}}</view>   
+</view>
+<view class="table" style="border-top:0">
+  <view style="flex:1">选择日期</view>
+  <view style="flex:2">
+    <input type="text" id="select_date" class="date_input" placeholder="请选择日期" onFocus="datePicker" value="{{select_date}}"/>
+  </view>   
+</view>
+<view style="margin-top:10px;text-align:center">
+  <form onSubmit="worklogQuery">
+  <button size="mini"  type="primary" form-type="submit">制定/修改 工作日志</button>
+  </form>
+</view>
+
+
+

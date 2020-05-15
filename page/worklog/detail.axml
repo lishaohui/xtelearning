@@ -1,0 +1,81 @@
+<view class="topview"> 培训申请表</view>
+    
+    <view class="form-row">
+    <view class="form-row-content" > 
+      申请人:  {{globalDBUserName}}
+   
+
+     </view>
+    </view>
+    <form onSubmit="addTrainSubmit">
+
+   
+     <view class="form-row">
+      <view class="form-row-label">培训名称：</view>
+      <view class="form-row-content">
+        <input placeholder="请输入培训名称" id="trainTitle" onBlur="keyInput" auto-focus/>
+      </view>
+    </view>
+    <view class="button-group">
+    <button class="gap" type="primary" size="mini" id="startDate"  onTap="startDatePicker">选择培训开始日期</button>
+    <button class="gap" type="primary" size="mini" id="endDate"  onTap="endDatePicker">选择培训结束日期</button>
+    </view>
+
+   
+       <view class="form-row">
+      <radio-group name="lib">
+        <view class="gap">
+          是否计划内
+             
+                 <radio id="isPlaned" value="1" checked="true"  />
+                <label for="AngularJS">计划内</label>
+                 <radio  id="isNotPlaned" value="0" />
+                 <label for="React">计划外</label>
+              
+        </view>
+      </radio-group>
+     </view>
+
+
+      <view class="form-row">
+       培训内容、目标
+        </view>
+ <view class="form-row">
+        <view class="form-row-content">
+          <textarea id="content" name="textarea" placeholder="请填写培训目标"  />
+        </view>
+    </view>
+
+   <view class="form-row">
+      <label class="form-row-label">培训地点:</label> 
+      <view class="form-row-content">
+        <input placeholder="请输入培训地点" id="address" onBlur="keyInput" auto-focus/>
+      </view>
+    </view>
+    <picker onChange="PickerOnChange" value="{{trainModeIndex}}" range="{{trainModeArray}}">
+      <view class="form-row">
+        <view class="form-row-label">培训方式：</view>
+        <view class="form-row-content">{{trainMode?trainModeArray[trainModeIndex]:"请选择"}}</view>
+      </view>
+    </picker>
+
+    <view class="form-row">
+      <label class="form-row-label">参训人员范围、名单:</label>
+        <view class="form-row-content">
+         <input placeholder="参训人员" id="trainPerson" onBlur="keyInput" auto-focus/>
+         </view>
+    </view>
+<view class="form-row"></view>
+    <view class="form-row">
+      <label class="form-row-label">费用预算:</label>
+      <view class="form-row-content">
+        <input size="mini" type="number" id="budget" onBlur="keyInput" auto-focus/>元
+      </view>   
+    </view>
+    <view class="button-group">
+      <button class="btn" type="primary" size="mini" form-type="submit">提交</button>
+      <button class="btn" type="ghost" size="mini"  form-type="reset">重置</button>
+    </view>
+   
+  </form>
+

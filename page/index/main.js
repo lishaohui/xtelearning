@@ -15,7 +15,7 @@ Page({
 
         let _this = this;
         dd.getStorage({
-          key:'storageDBUserId',
+          key:'storageHR',
           success(res){
             var DBUserId = JSON.stringify(res.data.DBUserId)
             var DBUserName = JSON.stringify(res.data.DBUserName)
@@ -33,10 +33,11 @@ Page({
         })
     },
     removeStorage(){
+       let _this = this;
       dd.removeStorage({
-        key:'storageDBUserId',
+        key:'storageHR',
         success(){
-          this.setData({
+          _this.setData({
             key:'',
             data:''
           })

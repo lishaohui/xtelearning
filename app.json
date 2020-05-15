@@ -8,7 +8,9 @@
     "page/index/user/userinfo_Job",
     "page/index/user/userinfo_ProSkillPosition",
     "page/index/user/userinfo_Contract",
-    "page/index/user/userinfo_ProQualification"
+    "page/index/user/userinfo_ProQualification",
+    "page/worklog/main",
+    "page/worklog/detail"
 
   ],
   "window": {

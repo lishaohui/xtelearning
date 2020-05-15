@@ -12,9 +12,7 @@ Page({
         globalUserId:'',
     },
     onLoad(){
-
         let _this = this;
-
         this.setData({
             corpId: app.globalData.corpId
         })     
@@ -60,38 +58,36 @@ Page({
               authCode:res.authCode,
             },
             success: (res) => {
-              console.log('success----',res)
               dd.showToast({
                 content:"登录成功！",
                 timer:1000,
-                success:()=>{
-                  var status = res.status;
-                  if(status == 200){
-                    let DBUserId = res.data.result.DBUserId;
-                    let DDUserName = res.data.result.DDUserName;
-
-                    app.globalData.globalDBUserId = DBUserId;
-                    app.globalData.globalDBUserName = loginName;
-                    app.globalData.globalDDUserName = DDUserName;
-
-                    dd.setStorage({
-                      key:'storageDBUserId',
-                      data:{
-                        DBUserId:DBUserId,
-                        DBUserName:loginName,
-                        DDUserName:DDUserName
-                      },
-                      success:(res) =>{
-                        dd.redirectTo({url:'/page/index/main'})
-                      },
-                      fail:(res)=>{
-                      },
-                      complete:(res)=>{
-                      }
-                    })
-                  }
-                }
               });
+              var status = res.status;
+              console.log('success----',status);
+              if(status == 200){
+                let DBUserId = res.data.result.DBUserId;
+                let DDUserName = res.data.result.DDUserName;
+
+                app.globalData.globalDBUserId = DBUserId;
+                app.globalData.globalDBUserName = loginName;
+                app.globalData.globalDDUserName = DDUserName;
+
+                dd.setStorage({
+                  key:'storageHR',
+                  data:{
+                    DBUserId:DBUserId,
+                    DBUserName:loginName,
+                    DDUserName:DDUserName
+                  },
+                  success:(res) =>{
+                    dd.redirectTo({url:'/page/worklog/main'})
+                  },
+                  fail:(res)=>{
+                  },
+                  complete:(res)=>{
+                  }
+                })
+              }
             },
             fail: (res) => {
               dd.hideLoading();
@@ -106,6 +102,7 @@ Page({
               });
             },
             complete: (res) => {
+              dd.hideLoading();
             }           
           });
         },
