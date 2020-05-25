@@ -5,7 +5,7 @@
 </view>
 <view class="table" style="border-top:0">
   <view style="flex:1">选择日期</view>
-  <view style="flex:2">
+  <view style="flex:2;padding:0;margin:0" >
     <input type="text" id="select_date" class="date_input" placeholder="请选择日期" onFocus="datePicker" value="{{select_date}}"/>
   </view>   
 </view>

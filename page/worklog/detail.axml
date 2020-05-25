@@ -1,81 +1,146 @@
-<view class="topview"> 培训申请表</view>
-    
-    <view class="form-row">
-    <view class="form-row-content" > 
-      申请人:  {{globalDBUserName}}
-   
+<view class="detail-title">工作日志（{{worklogDate}}）</view>
+<form onSubmit="saveWorklog">
 
-     </view>
+  <view class="detail-container">
+    <view class="d-title">当天工作完成情况</view>
+    <view class="table">
+      <view style="flex:1" class="table-title"></view>
+      <view style="flex:4" class="table-title">工作内容</view>   
+      <view style="flex:4" class="table-title">实际完成情况</view>
+      <view style="flex:4" class="table-title">完成情况分析</view>
     </view>
-    <form onSubmit="addTrainSubmit">
 
-   
-     <view class="form-row">
-      <view class="form-row-label">培训名称：</view>
-      <view class="form-row-content">
-        <input placeholder="请输入培训名称" id="trainTitle" onBlur="keyInput" auto-focus/>
+    <view a:for="{{worklogList1}}" a:for-item="item" a:for-index="index"> 
+      <view class="table">
+        <view style="flex:1" class="table-row">{{index+1}}</view>
+        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" data-value="{{index+1}}" data-name="worklog1" value="{{item.log1}}" /></view>
+        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" data-value="{{index+1}}" data-name="worklog1" value="{{item.log2}}" /></view>
+        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" data-value="{{index+1}}" data-name="worklog1" value="{{item.log3}}" /></view>
       </view>
     </view>
-    <view class="button-group">
-    <button class="gap" type="primary" size="mini" id="startDate"  onTap="startDatePicker">选择培训开始日期</button>
-    <button class="gap" type="primary" size="mini" id="endDate"  onTap="endDatePicker">选择培训结束日期</button>
+
+    <view class="table">
+      <view style="flex:1" class="table-row"></view>
+      <view style="flex:12">
+        <view  class="btn-add" onTap="objectAdd1">
+          <image mode="scaleToFill" src="../index/images/plus.png" class="btn-plus" aria-label="plus"/>添加
+        </view>
+      </view> 
+    </view>
+  </view>
+  <view style="padding:10px"></view>
+
+  <view class="detail-container">
+    <view class="d-title">第二天工作计划</view>
+    <view class="table">
+      <view style="flex:1" class="table-title"></view>
+      <view style="flex:4" class="table-title">计划工作内容</view>   
+      <view style="flex:4" class="table-title">工作完成节点</view>
+      <view style="flex:4" class="table-title">工作关键点</view>
     </view>
 
-   
-       <view class="form-row">
-      <radio-group name="lib">
-        <view class="gap">
-          是否计划内
-             
-                 <radio id="isPlaned" value="1" checked="true"  />
-                <label for="AngularJS">计划内</label>
-                 <radio  id="isNotPlaned" value="0" />
-                 <label for="React">计划外</label>
-              
-        </view>
-      </radio-group>
-     </view>
-
-
-      <view class="form-row">
-       培训内容、目标
-        </view>
- <view class="form-row">
-        <view class="form-row-content">
-          <textarea id="content" name="textarea" placeholder="请填写培训目标"  />
-        </view>
-    </view>
-
-   <view class="form-row">
-      <label class="form-row-label">培训地点:</label> 
-      <view class="form-row-content">
-        <input placeholder="请输入培训地点" id="address" onBlur="keyInput" auto-focus/>
+    <view a:for="{{worklogList2}}" a:for-item="item" a:for-index="index">
+      <view class="table">
+        <view style="flex:1" class="table-row">{{index+1}}</view>
+        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" data-value="{{index+1}}" data-name="worklog2" value="{{item.log1}}" /></view>
+        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" data-value="{{index+1}}" data-name="worklog2" value="{{item.log2}}" /></view>
+        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" data-value="{{index+1}}" data-name="worklog2" value="{{item.log3}}" /></view>
       </view>
     </view>
-    <picker onChange="PickerOnChange" value="{{trainModeIndex}}" range="{{trainModeArray}}">
-      <view class="form-row">
-        <view class="form-row-label">培训方式：</view>
-        <view class="form-row-content">{{trainMode?trainModeArray[trainModeIndex]:"请选择"}}</view>
-      </view>
-    </picker>
 
-    <view class="form-row">
-      <label class="form-row-label">参训人员范围、名单:</label>
-        <view class="form-row-content">
-         <input placeholder="参训人员" id="trainPerson" onBlur="keyInput" auto-focus/>
-         </view>
+    <view class="table">
+      <view style="flex:1" class="table-row"></view>
+      <view style="flex:12">
+        <view class="btn-add" onTap="objectAdd2">
+          <image mode="scaleToFill" src="../index/images/plus.png" class="btn-plus" aria-label="plus"/>添加
+        </view>
+      </view> 
     </view>
-<view class="form-row"></view>
-    <view class="form-row">
-      <label class="form-row-label">费用预算:</label>
-      <view class="form-row-content">
-        <input size="mini" type="number" id="budget" onBlur="keyInput" auto-focus/>元
-      </view>   
+  </view>
+
+  <template name="items">
+    <view class="modal" a:if="{{!hidden}}" key="modal">
+        <view class="modal-mask" animation="{{animMaskData}}"/>
+        <view class="modal-container" animation="{{animContentData}}">
+            <view class="modal-close-worklog" onTap="onModalCloseTap">×</view>
+            <view class="modal-content">
+                <view class="grid-child">
+                    <view class="grid-child-entitle">
+                        <text class="c-entitle">当前编辑的是第{{current_row}}行</text>
+                    </view>
+                    <form onSubmit="getTemplateData">
+                    <view class="clist" a:if="{{worklogType}}">
+                        <view class="clist-item">
+                            <view class="clist-item-title">
+                                <label><label style="font-color:red;font-weight:bold;">*</label> 工作内容</label>
+                            </view>
+                            <view class="clist-item-content">
+                                <textarea class="clist-item-content-content" name="template_log1" maxlength='-1' auto-height="true" placeholder="请填写工作内容" value="{{worklogList1[current_row-1].log1}}"></textarea>
+                            </view>
+                        </view>
+                        <view  class="clist-item">
+                            <view class="clist-item-title">
+                                <label><label style="font-color:red;font-weight:bold;">*</label> 实际完成情况</label>
+                            </view>
+                            <view class="clist-item-content">
+                                <textarea class="clist-item-content-content" name="template_log2" maxlength='-1' auto-height="true" placeholder="请填写实际完成情况" value="{{worklogList1[current_row-1].log2}}"></textarea>
+                            </view>
+                        </view>
+                        <view  class="clist-item">
+                            <view class="clist-item-title">
+                                <label><label style="font-color:red;font-weight:bold;">*</label> 完成情况分析</label>
+                            </view>
+                            <view class="clist-item-content">
+                                <textarea class="clist-item-content-content" name="template_log3" maxlength='-1' auto-height="true" placeholder="请填写完成情况分析" value="{{worklogList1[current_row-1].log3}}"></textarea>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="clist" a:if="{{!worklogType}}">
+                        <view class="clist-item">
+                            <view class="clist-item-title">
+                                <label><label style="font-color:red;font-weight:bold;">*</label> 计划工作内容</label>
+                            </view>
+                            <view class="clist-item-content">
+                                <textarea class="clist-item-content-content" name="template_log1" maxlength='-1' auto-height="true" placeholder="请填写计划工作内容" value="{{worklogList2[current_row-1].log1}}"></textarea>
+                            </view>
+                        </view>
+                        <view  class="clist-item">
+                            <view class="clist-item-title">
+                                <label><label style="font-color:red;font-weight:bold;">*</label> 工作完成节点</label>
+                            </view>
+                            <view class="clist-item-content">
+                                <textarea class="clist-item-content-content" name="template_log2" maxlength='-1' auto-height="true" placeholder="请填写工作完成节点" value="{{worklogList2[current_row-1].log2}}"></textarea>
+                            </view>
+                        </view>
+                        <view  class="clist-item">
+                            <view class="clist-item-title">
+                                <label><label style="font-color:red;font-weight:bold;">*</label> 工作关键点</label>
+                            </view>
+                            <view class="clist-item-content">
+                                <textarea class="clist-item-content-content" name="template_log3" maxlength='-1' auto-height="true" placeholder="请填写工作关键点" value="{{worklogList2[current_row-1].log3}}"></textarea>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="btn-bottom">
+                      <button class="btn-bottom-delete" size="mini" type="ghost" data-name="{{worklogType}}" data-value="{{current_row}}" onTap="deleteLog">删除</button>
+                      <button class="btn-bottom-save" size="mini" type="primary" form-type="submit" data-name="{{worklogType}}" data-value="{{current_row}}">保存</button>
+                    </view>
+                    </form>
+                </view>
+            </view>
+        </view>
     </view>
-    <view class="button-group">
-      <button class="btn" type="primary" size="mini" form-type="submit">提交</button>
-      <button class="btn" type="ghost" size="mini"  form-type="reset">重置</button>
-    </view>
-   
-  </form>
+</template>
+
+  <template
+          is="items"
+          key="items"
+          data="{{hidden: hidden, worklogList1:worklogList1,worklogList2:worklogList2,row1:row1,row2:row2, worklogType:worklogType,current_row:current_row,animMaskData, animContentData}}"
+  />
+
+  <view class="detail-btn-bottom">
+    <button class="detail-btn-bottom-save" size="mini" type="ghost">暂存</button>
+    <button class="detail-btn-bottom-submit" size="mini" type="primary" form-type="submit">提交</button>
+  </view>
+</form>
 

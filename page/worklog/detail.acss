@@ -26,3 +26,268 @@
 .gap{
   margin: 0 20px;
 }
+.table{
+  border: 1px solid #ccc;
+  display:flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.table > view{
+  height: 30px;
+  display:flex;
+  align-items: center;
+  justify-content: space-around;
+  border-right: 1px solid #ccc;
+}
+
+
+.btn{
+  border:0;
+}
+
+.select_box {
+    position: absolute;
+    background-color: #eee;
+    padding: 0 10rpx;
+    width: 93%;
+    top: 80rpx;
+    overflow: hidden;
+    text-align: center
+} 
+.select_one {
+    height: 60rpx;
+    line-height: 60rpx;
+    border-bottom: 1px solid #ccc;
+}
+.table{
+  height: 30px;
+  display:flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.table > view{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.toRight{
+  height:30rpx;
+  width: 30rpx;
+}
+
+<!--以下是弹出窗口的样式-->
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+}
+
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  opacity: 0;
+}
+
+.modal-container {
+  background-color: #fff;
+  z-index: 1000;
+  position: fixed;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  height: 88%;
+  transform: translateY(100%);
+  /* transition: all 2s ease; */
+}
+
+.modal-close-worklog {
+  position: absolute;
+  top: 30rpx;
+  right: 50rpx;
+  color: #888;
+  font-size: 50rpx;
+  font-weight: 200;
+}
+
+.modal-content {
+  height: 100%;
+}
+
+.grid-child {
+  padding-top: 40rpx;
+  background-color: #eee;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.grid-child-title {
+  height: 54rpx;
+  padding: 0 40rpx;
+}
+
+.grid-child-entitle {
+  height: 48rpx;
+  padding: 0 40rpx;
+}
+
+.c-title {
+  font-size: 48rpx;
+}
+
+.c-entitle {
+  font-size: 34rpx;
+  color: #888;
+  line-height: 1.5;
+}
+
+.clist {
+  margin-top: 50rpx;
+  padding: 0;
+  flex: 1;
+  overflow-y: scroll;
+}
+
+.clist-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 144rpx;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+}
+
+.clist-item:active {
+  background-color: #fff;
+}
+
+.clist-item-title {
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  width: 25%;
+}
+
+.clist-item-content {
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.clist-item-content-content {
+  font-size: 28rpx;
+  line-height: 28rpx;
+  height:100%;
+}
+
+.btn-bottom{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+  text-align: center;
+}
+
+.btn-bottom-delete{
+  width: 30%;
+  margin-right: 50rpx;
+}
+
+.btn-bottom-save{
+  width: 30%;
+  margin-left: 50rpx;
+}
+
+.detail-btn-bottom{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+  text-align: center;
+}
+
+.detail-btn-bottom-save{
+  width: 30%;
+  margin-right: 50rpx;
+}
+
+.detail-btn-bottom-submit{
+  width: 30%;
+  margin-left: 50rpx;
+}
+
+.c-list-item-extra {
+  width: 80rpx;
+}
+
+.c-list-item-arrow {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.detail-title{
+  text-align: center;
+  padding: 10px 0;
+  font-weight: bold;
+}
+
+.detail-container{
+  background-color: #fff;
+  padding:0px 0 15px 0;
+}
+
+.detail-container .d-title{
+  padding:5px 0 5px 5px;
+  font-size: 28rpx;
+  color: #888;
+  line-height: 1.5;
+}
+
+.table-title{
+  background-color: #ddd;
+}
+
+.table-row{
+  background-color: #eee;
+}
+
+.table-content{
+  border-top: 0;
+}
+.table-content > input{
+  font-size: 28rpx;
+  line-height: 1.5;
+  overflow:hidden; 
+  white-space:nowrap; 
+  text-overflow:ellipsis;
+}
+
+.btn-plus{
+  width:25rpx;
+  height:25rpx;
+  padding: 0;
+}
+.btn-add{
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  color: blue
+}
+.btn-add > image{
+  margin-top:15rpx;
+  margin-right: 5rpx;
+}
