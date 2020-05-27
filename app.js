@@ -8,8 +8,8 @@ App({
     globalDBUserName:'',     //人资系统登录用户数据库所对应姓名
     globalDDUserName:'',     //钉钉客户端登录用户姓名
     StorageDBUserId:'',
-    url:'http://localhost:8088/HR/dd'
-    //url:'http://testhr.suntien.com/dd'
+    //url:'http://localhost:8088/HR/dd'
+    url:'http://testhr.suntien.com/dd'
   },
   onLaunch(options) {
     //console.log('App Launch', options);
@@ -22,7 +22,7 @@ App({
     dd.getStorage({
       key:'storageHR',
       success(res){
-        console.log(res);
+        //console.log(res);
         if(res.data==null){
           dd.redirectTo({url:'/page/worklog/index'})
         }

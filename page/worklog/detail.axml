@@ -1,6 +1,13 @@
 <view class="detail-title">工作日志（{{worklogDate}}）</view>
 <form onSubmit="saveWorklog">
 
+  <view class="selfscore-item">
+    <view class="selfscore-title">5S自评分</view>
+    <view class="selfscore"><input type="number" name="selfscore" value="100" /></view>
+  </view>
+
+  <view style="padding:10px"></view>
+
   <view class="detail-container">
     <view class="d-title">当天工作完成情况</view>
     <view class="table">
@@ -13,9 +20,9 @@
     <view a:for="{{worklogList1}}" a:for-item="item" a:for-index="index"> 
       <view class="table">
         <view style="flex:1" class="table-row">{{index+1}}</view>
-        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" data-value="{{index+1}}" data-name="worklog1" value="{{item.log1}}" /></view>
-        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" data-value="{{index+1}}" data-name="worklog1" value="{{item.log2}}" /></view>
-        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" data-value="{{index+1}}" data-name="worklog1" value="{{item.log3}}" /></view>
+        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" name="list1-{{index+1}}-log1" data-value="{{index+1}}" data-name="worklog1" value="{{item.log1}}" /></view>
+        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" name="list1-{{index+1}}-log2" data-value="{{index+1}}" data-name="worklog1" value="{{item.log2}}" /></view>
+        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" name="list1-{{index+1}}-log3" data-value="{{index+1}}" data-name="worklog1" value="{{item.log3}}" /></view>
       </view>
     </view>
 
@@ -42,9 +49,9 @@
     <view a:for="{{worklogList2}}" a:for-item="item" a:for-index="index">
       <view class="table">
         <view style="flex:1" class="table-row">{{index+1}}</view>
-        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" data-value="{{index+1}}" data-name="worklog2" value="{{item.log1}}" /></view>
-        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" data-value="{{index+1}}" data-name="worklog2" value="{{item.log2}}" /></view>
-        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" data-value="{{index+1}}" data-name="worklog2" value="{{item.log3}}" /></view>
+        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" name="list2-{{index+1}}-log1" data-value="{{index+1}}" data-name="worklog2" value="{{item.log1}}" /></view>
+        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" name="list2-{{index+1}}-log2" data-value="{{index+1}}" data-name="worklog2" value="{{item.log2}}" /></view>
+        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" name="list2-{{index+1}}-log3" data-value="{{index+1}}" data-name="worklog2" value="{{item.log3}}" /></view>
       </view>
     </view>
 
@@ -139,8 +146,8 @@
   />
 
   <view class="detail-btn-bottom">
-    <button class="detail-btn-bottom-save" size="mini" type="ghost">暂存</button>
-    <button class="detail-btn-bottom-submit" size="mini" type="primary" form-type="submit">提交</button>
+    <button class="detail-btn-bottom-save" size="mini" type="primary" form-type="submit" data-name="save">保存</button>
+    <button class="detail-btn-bottom-submit" size="mini" type="primary" form-type="submit" data-name="submit" disabled="{{submit_diasbled}}">提交</button>
   </view>
 </form>
 

@@ -16,7 +16,9 @@ Page({
     current_row:0,
     worklogDate:'',
     worklogFlag: 0,//标记，0是新增
-    worklogType:'' //内容类型，是当天工作内容 还是 第二天工作内容
+    worklogType:'' ,//内容类型，是当天工作内容 还是 第二天工作内容
+    modal_kpi_id:-1,
+    submit_diasbled:true,//默认为true,即不可提交
   },
   onLoad(option){
     let _this = this;
@@ -49,9 +51,18 @@ Page({
             var result = res.data;
             var wflag = result.flag;
             var list = result.list;
-            //console.log(list);
+            var disable_flag = true;
+            var now_time = new Date().getTime();//进入页面时的时间
+            var allow_time = select_date + " 17:20:00";
+            var allow_time_long = new Date(allow_time).getTime();//允许提交时间为选择日期当天的17:20
+            if(wflag == 0 || wflag == 3){
+              if(now_time >= allow_time_long){
+                disable_flag = false;
+              }
+            }
             _this.setData({
               worklogFlag: wflag,
+              submit_diasbled:disable_flag,
             });
 
             //将从人资端查到的工作日志记录，填写在钉钉端
@@ -103,6 +114,7 @@ Page({
                     _this.setData({
                       worklogList1: _this.data.worklogList1.concat(map),
                       row1 : map.row,
+                      modal_kpi_id:list[0][0].worklog_id,
                     })
                   }else{
                     var map = {};
@@ -219,8 +231,101 @@ Page({
   },
 
   saveWorklog(data){
-    console.log(data);
+    var detail = data.detail;
+    var form_type = data.buttonTarget.dataset.name;
+    var row1 = this.data.row1;
+    var row2 =  this.data.row2;
+    var msg = "";
+    var params = {};
+    params.user_id = this.data.globalDBUserId;
+    params.worklog_date = new Date(this.data.worklogDate+" 00:00:00").getTime();
+    var selfscore = detail.value.selfscore;
+    params.selfscore = selfscore;
+    if(selfscore.length <= 0){
+      msg += "5s自评分未填写！\r\n";
+    }else if(parseInt(selfscore) < 0 || parseInt(selfscore) > 100){
+      msg += "5s自评分应在分值范围内填写！\r\n";
+    }
+    params.items = [];
+    params.submit_flag = 0;
+    params.modal_kpi_id = this.data.modal_kpi_id;
+    for(var i = 0; i< row1; i++){
+      var param={};
+      param.work_type = 1;
+      param.work_content = detail.value["list1-"+(i+1)+"-log1"];
+      if(param.work_content.length <= 0){
+        msg += "第"+(i+1)+"条工作内容未填写！\r\n";
+      }
+      param.work_result = detail.value["list1-"+(i+1)+"-log2"];
+      if(param.work_result.length <= 0){
+        msg += "第"+(i+1)+"条实际完成情况未填写！\r\n";
+      }
+      param.work_analysis = detail.value["list1-"+(i+1)+"-log3"];
+      if(param.work_analysis.length <= 0){
+        msg += "第"+(i+1)+"条完成情况分析未填写！\r\n";
+      }
+      param.rent = (i+1);
+      params.items.push(param);
+    }
+    for(var i = 0; i< row2; i++){
+      var param={};
+      param.work_type = 2;
+      param.work_content = detail.value["list2-"+(i+1)+"-log1"];
+      if(param.work_content.length <= 0){
+        msg += "第"+(i+1)+"条计划工作内容未填写！\r\n";
+      }
+      param.work_result = detail.value["list2-"+(i+1)+"-log2"];
+      param.work_analysis = detail.value["list2-"+(i+1)+"-log3"];
+      param.rent = (i+1);
+      params.items.push(param);
+    }
+    if(form_type=="save"){
+      params.submit_flag = 0;
+    }else if(form_type=="submit"){
+      params.submit_flag = 1;
+      if(msg.length>0){
+        dd.alert({
+          title:"提示",
+          content:msg,
+          buttonText: '确定',
+        })
+      }
+    }
+    if(form_type=="save" || (form_type=="submit"&&msg.length<=0)){//如果是暂存或提交（无报错信息）
+      dd.httpRequest({
+        url: url+"/saveWorklogitems.do",
+        method: 'POST',
+        dataType: 'json',
+        data:{
+          params:JSON.stringify(params),
+        },
+        success: (res) => {
+          //console.log(res);
+          this.setData({
+            modal_kpi_id:res.data.modal_kpi_id
+          })
+          dd.alert({
+            title:"提示",
+            content:res.data.msg,
+            buttonText: '确定',
+            success: (res) =>{
+            }
+          })
+          if(form_type=="submit"){
+            this.setData({
+              submit_diasbled:true
+            })
+          }
+        },
+        fail: (res) => {
+          
+        },
+        complete: (res) => {
+        }           
+      });
+    }
   },
+
   getTemplateData(data){
     let _this = this;
     var type= data.buttonTarget.dataset.name;//初始值为空。空代表第二天工作情况，非空代表当天工作情况

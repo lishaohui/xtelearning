@@ -2,7 +2,7 @@
   <image class="topimg" src="/page/index/images/suntien-logo.png" mode="aspectFit" />
   
   <view class="viewbody">
-      <view class="title">人力资源系统</view>
+      <view class="title">人力资源管理系统</view>
   </view>
   <view class="formview">
     <form onSubmit="loginSubmit">

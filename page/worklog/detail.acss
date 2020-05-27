@@ -291,3 +291,27 @@
   margin-top:15rpx;
   margin-right: 5rpx;
 }
+
+.selfscore-item{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 60rpx;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+.selfscore-title{
+  padding:5px 0 5px 5px;
+  font-size: 28rpx;
+  color: #888;
+  line-height: 1.5;
+  text-align: center;
+  width: 50%;
+}
+.selfscore{
+  border-left: 1px solid #ddd;
+  font-size: 24rpx;
+  text-align: center;
+  width: 50%
+}
