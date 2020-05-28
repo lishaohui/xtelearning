@@ -310,6 +310,7 @@
   width: 50%;
 }
 .selfscore{
+  border-top: 1px solid #ddd;
   border-left: 1px solid #ddd;
   font-size: 24rpx;
   text-align: center;

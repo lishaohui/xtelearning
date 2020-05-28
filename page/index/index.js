@@ -93,7 +93,7 @@ Page({
               dd.hideLoading();
               console.log("httpRequestFail---",res)
               dd.alert({
-                content:"用户名或密码错误，请重新登录",
+                content:"用户名或密码错误，请重新登录!",
                 success:() =>{
                   dd.reLaunch({
                     url:'/page/index/index',

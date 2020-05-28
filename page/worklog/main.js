@@ -12,7 +12,8 @@ Page({
         trainInfoList:[],
         select_date:'',
         select_data_time:'',
-        today_time:''
+        today_time:'',
+        focus:true
     },
     onLoad(options){
 
@@ -61,9 +62,9 @@ Page({
           var select_time = ddd.getTime();
            _this.setData({
               select_date:JSON.parse(JSON.stringify(res.date)),
-              select_data_time:select_time
+              select_data_time:select_time,
+              focus:false
             })  
-
         },
       });
     },
