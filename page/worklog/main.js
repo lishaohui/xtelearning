@@ -13,7 +13,6 @@ Page({
         select_date:'',
         select_data_time:'',
         today_time:'',
-        focus:true
     },
     onLoad(options){
 
@@ -63,7 +62,6 @@ Page({
            _this.setData({
               select_date:JSON.parse(JSON.stringify(res.date)),
               select_data_time:select_time,
-              focus:false
             })  
         },
       });

@@ -51,20 +51,7 @@ Page({
             var result = res.data;
             var wflag = result.flag;
             var list = result.list;
-            var disable_flag = true;
-            var now_time = new Date().getTime();//进入页面时的时间
-            var allow_time = select_date + " 17:20:00";
-            var allow_time_long = new Date(allow_time).getTime();//允许提交时间为选择日期当天的17:20
-            if(wflag == 0 || wflag == 3){
-              if(now_time >= allow_time_long){
-                disable_flag = false;
-              }
-            }
-            _this.setData({
-              worklogFlag: wflag,
-              submit_diasbled:disable_flag,
-            });
-
+            
             //将从人资端查到的工作日志记录，填写在钉钉端
             if(wflag==0){//wflag=0 代表所选日期工作日志为新增（未填报状态）
               if(list.length==0){ //如果上一工作日志的第二天工作为空，则今天渲染一条空记录
@@ -129,6 +116,22 @@ Page({
                   }
                 }
             }
+
+            //再检查能否提交
+            var disable_flag = true;
+            var now_time = new Date().getTime();//进入页面时的时间
+            var allow_time = select_date + " 17:20:00";
+            var allow_time_long = new Date(allow_time).getTime();//允许提交时间为选择日期当天的17:20
+            if(wflag == 0 || wflag == 3){
+              if(now_time >= allow_time_long){
+                disable_flag = false;
+              }
+            }
+            _this.setData({
+              worklogFlag: wflag,
+              submit_diasbled:disable_flag,
+            });
+
           },
           fail: (err)=>{
           },
@@ -199,26 +202,28 @@ Page({
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         success({ confirm }) {
-          if(type.length>0){
-            var worklog1 = _this.data.worklogList1;
-            if(worklog1.length > 0){
-              worklog1.splice(index-1,1);
+          if(confirm){
+            if(type.length>0){
+              var worklog1 = _this.data.worklogList1;
+              if(worklog1.length > 0){
+                worklog1.splice(index-1,1);
+              }
+              _this.setData({
+                worklogList1 : worklog1,
+                row1 : _this.data.row1 -1
+              })
+            }else{
+              var worklog2 = _this.data.worklogList2;
+              if(worklog2.length > 0){
+                worklog2.splice(index-1,1);
+              }
+              _this.setData({
+                worklogList2 : worklog2,
+                row2 : _this.data.row2 -1
+              })
             }
-            _this.setData({
-              worklogList1 : worklog1,
-              row1 : _this.data.row1 -1
-            })
-          }else{
-            var worklog2 = _this.data.worklogList2;
-            if(worklog2.length > 0){
-              worklog2.splice(index-1,1);
-            }
-            _this.setData({
-              worklogList2 : worklog2,
-              row2 : _this.data.row2 -1
-            })
           }
-          _this.onModalCloseTap();
+          _this.onModalCloseTap(); 
         },
         fail() {
           console.log('fail');
@@ -335,23 +340,23 @@ Page({
     var log3 = data.detail.value.template_log3;
     var msg = "";
     if(type.length>0){ //当天工作情况
-      if(log1==""){
-        msg += "工作内容不能为空！\r\n";
-      }
-      if(log2==""){
-        msg += "实际完成情况不能为空！\r\n";
-      }
-      if(log3==""){
-        msg += "完成情况分析不能为空！";
-      }
-      if(msg.length>0){
-        dd.showToast({ 
-          content: msg,
-          type:'text',
-          timer:1500,
-          color:'#fff',
-        })
-      }else{
+    //   if(log1==""){
+    //     msg += "工作内容不能为空！\r\n";
+    //   }
+    //   if(log2==""){
+    //     msg += "实际完成情况不能为空！\r\n";
+    //   }
+    //   if(log3==""){
+    //     msg += "完成情况分析不能为空！";
+    //   }
+    //   if(msg.length>0){
+    //     dd.showToast({ 
+    //       content: msg,
+    //       type:'text',
+    //       timer:1500,
+    //       color:'#fff',
+    //     })
+    //   }else{
         var value1 = "worklogList1["+(index-1)+"].log1";
         var value2 = "worklogList1["+(index-1)+"].log2";
         var value3 = "worklogList1["+(index-1)+"].log3";
@@ -361,25 +366,25 @@ Page({
           [value3]: log3,
         })
         _this.onModalCloseTap();
-      }
+      // }
     }else{//第二天工作情况
-      if(log1==""){
-        msg += "计划工作内容不能为空！\r\n";
-      }
-      if(log2==""){
-        msg += "工作完成节点不能为空！\r\n";
-      }
-      if(log3==""){
-        msg += "工作关键点不能为空！";
-      }
-      if(msg.length>0){
-        dd.showToast({ 
-          content: msg,
-          type:'text',
-          timer:1500,
-          color:'#fff',
-        })
-      }else{
+      // if(log1==""){
+      //   msg += "计划工作内容不能为空！\r\n";
+      // }
+      // if(log2==""){
+      //   msg += "工作完成节点不能为空！\r\n";
+      // }
+      // if(log3==""){
+      //   msg += "工作关键点不能为空！";
+      // }
+      // if(msg.length>0){
+      //   dd.showToast({ 
+      //     content: msg,
+      //     type:'text',
+      //     timer:1500,
+      //     color:'#fff',
+      //   })
+      // }else{
         var value1 = "worklogList2["+(index-1)+"].log1";
         var value2 = "worklogList2["+(index-1)+"].log2";
         var value3 = "worklogList2["+(index-1)+"].log3";
@@ -389,7 +394,7 @@ Page({
           [value3]: log3,
         })
         _this.onModalCloseTap();
-      }
+      //}
     }
   },
 

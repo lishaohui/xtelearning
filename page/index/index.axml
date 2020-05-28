@@ -10,7 +10,7 @@
         <label class="type">登录名</label> <input placeholder="登录名" id="loginName" onBlur="keyInput" auto-focus />
       </view>
       <view class="login">
-        <label class="typepw">密码</label> <input type="text" id="password" placeholder="密码" onBlur="keyInput" password />
+        <label class="typepw">密码</label> <input type="text" id="password" placeholder="密码" onInput="keyInput" password />
       </view>
        <view class="button-group">
         <view class="viewbody">
