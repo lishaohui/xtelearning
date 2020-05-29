@@ -76,7 +76,7 @@ Page({
         })
       }else{
         var select_date = this.data.select_date;
-        dd.redirectTo({url:'/page/worklog/detail?date='+select_date})
+        dd.navigateTo({url:'/page/worklog/detail?date='+select_date})
       }
     }
 })

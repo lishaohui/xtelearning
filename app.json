@@ -2,13 +2,6 @@
   "pages": [
     "page/index/index",
     "page/index/main",
-    "page/index/addTrain/addTrain",
-    "page/index/user/deptUserInfo",
-    "page/index/user/userinfo_Education",
-    "page/index/user/userinfo_Job",
-    "page/index/user/userinfo_ProSkillPosition",
-    "page/index/user/userinfo_Contract",
-    "page/index/user/userinfo_ProQualification",
     "page/worklog/main",
     "page/worklog/detail"
 

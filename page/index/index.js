@@ -3,8 +3,8 @@ let url = app.globalData.url;
 
 Page({
     data:{
-        corpId: '',
         authCode:'',
+        access_token:'',
         userId:'',
         userName:'',
         loginName:'',
@@ -13,12 +13,8 @@ Page({
     },
     onLoad(){
         let _this = this;
-        this.setData({
-            corpId: app.globalData.corpId
-        }) 
-        console.log(this.data.authCode)    
     },
-    
+
     loginSubmit(){
       var loginName = this.data.loginName;
       var password = this.data.password;
@@ -64,7 +60,7 @@ Page({
                 timer:1000,
               });
               var status = res.status;
-              console.log('success----',status);
+              //console.log('success----',status);
               if(status == 200){
                 let DBUserId = res.data.result.DBUserId;
                 let DDUserName = res.data.result.DDUserName;
