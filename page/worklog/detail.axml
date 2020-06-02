@@ -1,3 +1,4 @@
+<view class="container">
 <view class="detail-title"><label class="worklog_title">工作日志（{{worklogDate}}）</label></view>
 <form onSubmit="saveWorklog">
 
@@ -18,11 +19,11 @@
     </view>
 
     <view a:for="{{worklogList1}}" a:for-item="item" a:for-index="index"> 
-      <view class="table">
+      <view class="table" >
         <view style="flex:1" class="table-row">{{index+1}}</view>
-        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" name="list1-{{index+1}}-log1" data-value="{{index+1}}" data-name="worklog1" value="{{item.log1}}" /></view>
-        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" name="list1-{{index+1}}-log2" data-value="{{index+1}}" data-name="worklog1" value="{{item.log2}}" /></view>
-        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" name="list1-{{index+1}}-log3" data-value="{{index+1}}" data-name="worklog1" value="{{item.log3}}" /></view>
+        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" readonly name="list1-{{index+1}}-log1" data-value="{{index+1}}" data-name="worklog1" value="{{item.log1}}" /></view>
+        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" readonly name="list1-{{index+1}}-log2" data-value="{{index+1}}" data-name="worklog1" value="{{item.log2}}" /></view>
+        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" readonly name="list1-{{index+1}}-log3" data-value="{{index+1}}" data-name="worklog1" value="{{item.log3}}" /></view>
       </view>
     </view>
 
@@ -49,9 +50,9 @@
     <view a:for="{{worklogList2}}" a:for-item="item" a:for-index="index">
       <view class="table">
         <view style="flex:1" class="table-row">{{index+1}}</view>
-        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" name="list2-{{index+1}}-log1" data-value="{{index+1}}" data-name="worklog2" value="{{item.log1}}" /></view>
-        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" name="list2-{{index+1}}-log2" data-value="{{index+1}}" data-name="worklog2" value="{{item.log2}}" /></view>
-        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" name="list2-{{index+1}}-log3" data-value="{{index+1}}" data-name="worklog2" value="{{item.log3}}" /></view>
+        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" readonly name="list2-{{index+1}}-log1" data-value="{{index+1}}" data-name="worklog2" value="{{item.log1}}" /></view>
+        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" readonly name="list2-{{index+1}}-log2" data-value="{{index+1}}" data-name="worklog2" value="{{item.log2}}" /></view>
+        <view style="flex:4" class="table-content"><input onFocus="FillWorklog" readonly name="list2-{{index+1}}-log3" data-value="{{index+1}}" data-name="worklog2" value="{{item.log3}}" /></view>
       </view>
     </view>
 
@@ -82,7 +83,7 @@
                                 <label><label style="font-color:red;font-weight:bold;">*</label> 工作内容</label>
                             </view>
                             <view class="clist-item-content">
-                                <textarea class="clist-item-content-content" name="template_log1" maxlength='-1' auto-height="true" placeholder="请填写工作内容" value="{{worklogList1[current_row-1].log1}}" focus="true"></textarea>
+                                <textarea class="clist-item-content-content" name="template_log1" maxlength='-1' auto-height="true" placeholder="请填写工作内容" value="{{worklogList1[current_row-1].log1}}" focus="{{true}}" cursor-spacing="30"></textarea>
                             </view>
                         </view>
                         <view  class="clist-item">
@@ -108,7 +109,7 @@
                                 <label><label style="font-color:red;font-weight:bold;">*</label> 计划工作内容</label>
                             </view>
                             <view class="clist-item-content">
-                                <textarea class="clist-item-content-content" name="template_log1" maxlength='-1' auto-height="true" placeholder="请填写计划工作内容" value="{{worklogList2[current_row-1].log1}}" focus="true"></textarea>
+                                <textarea class="clist-item-content-content" name="template_log1" maxlength='-1' auto-height="true" placeholder="请填写计划工作内容" value="{{worklogList2[current_row-1].log1}}"></textarea>
                             </view>
                         </view>
                         <view  class="clist-item">
@@ -130,7 +131,7 @@
                     </view>
                     <view class="btn-bottom">
                       <button class="btn-bottom-delete" size="mini" type="ghost" data-name="{{worklogType}}" data-value="{{current_row}}" onTap="deleteLog">删除</button>
-                      <button class="btn-bottom-save" size="mini" type="primary" form-type="submit" data-name="{{worklogType}}" data-value="{{current_row}}">保存</button>
+                      <button class="btn-bottom-save" size="mini" type="primary" form-type="submit" data-name="{{worklogType}}" data-value="{{current_row}}">保存{{temp}}</button>
                     </view>
                   </form>
                 </view>
@@ -150,4 +151,6 @@
     <button class="detail-btn-bottom-submit" size="mini" type="primary" form-type="{{formtype}}" data-name="submit" disabled="{{submit_diasbled}}">提交</button>
   </view>
 </form>
+
+</view>
 

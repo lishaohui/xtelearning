@@ -123,6 +123,7 @@ Page({
             var formtype_flag = "button";
             var now_time = new Date().getTime();//进入页面时的时间
             var allow_time = select_date + " 17:20:00";
+            allow_time = allow_time.replace(/-/g, '/');
             var allow_time_long = new Date(allow_time).getTime();//允许提交时间为选择日期当天的17:20
             if(wflag == 0 || wflag == 3){
               if(now_time >= allow_time_long){
@@ -146,7 +147,6 @@ Page({
     });
 
   },
-  
    //添加一个列表
    objectAdd1(e) {
       var addlist = this.data.worklogList1;
@@ -247,7 +247,7 @@ Page({
     var msg = "";
     var params = {};
     params.user_id = this.data.globalDBUserId;
-    params.worklog_date = new Date(this.data.worklogDate+" 00:00:00").getTime();
+    params.worklog_date = new Date((this.data.worklogDate+" 00:00:00").replace(/-/g, '/')).getTime();
     var selfscore = detail.value.selfscore;
     params.selfscore = selfscore;
     if(selfscore.length <= 0){
