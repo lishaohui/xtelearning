@@ -1,4 +1,4 @@
-<view style="text-align:center"><label class="worklog_title">工作日志填报</label></view>
+<view class="page_title"><label class="worklog_title">工作日志填报</label></view>
 <view class="table" style="margin-top:10px">
   <view style="flex:1">姓名</view>
   <view style="flex:2">{{globalDBUserName}}</view>   
@@ -9,9 +9,13 @@
     <input type="text" id="select_date" class="date_input" placeholder="请选择日期" disabled="true" value="{{select_date}}"/>
   </view>   
 </view>
-<view style="margin-top:10px;text-align:center">
+<view class="table" style="border-top:0">
+  <view style="flex:1">提交状态</view>
+  <view style="flex:2">{{submit_flag}}</view>   
+</view>
+<view class="btn_view">
   <form onSubmit="worklogQuery">
-  <button size="mini"  type="primary" form-type="submit">制定/修改 工作日志</button>
+  <button size="default"  form-type="submit" class="btn_submit">制定/修改 工作日志</button>
   </form>
 </view>
 

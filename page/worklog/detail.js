@@ -19,6 +19,7 @@ Page({
     worklogType:'' ,//内容类型，是当天工作内容 还是 第二天工作内容
     modal_kpi_id:-1,
     submit_diasbled:true,//默认为true,即不可提交
+    formtype:"button",//关于提交按钮的类型，默认为普通按钮
   },
   onLoad(option){
     let _this = this;
@@ -119,17 +120,20 @@ Page({
 
             //再检查能否提交
             var disable_flag = true;
+            var formtype_flag = "button";
             var now_time = new Date().getTime();//进入页面时的时间
             var allow_time = select_date + " 17:20:00";
             var allow_time_long = new Date(allow_time).getTime();//允许提交时间为选择日期当天的17:20
             if(wflag == 0 || wflag == 3){
               if(now_time >= allow_time_long){
                 disable_flag = false;
+                formtype_flag = "submit";
               }
             }
             _this.setData({
               worklogFlag: wflag,
               submit_diasbled:disable_flag,
+              formtype: formtype_flag, 
             });
 
           },

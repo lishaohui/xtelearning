@@ -1,27 +1,32 @@
-<view class="viewbody">
-  <image class="topimg" src="/page/index/images/suntien-logo.png" mode="aspectFit" />
-  
-  <view class="viewbody">
-      <view class="title">人力资源管理系统</view>
+<view class="login-content" >
+  <!-- 顶部背景图 -->
+  <view class="login-bg" >
+    <image class="login-bg" mode="widthFix" src="../images/login/bg-login.png" aria-label="login"></image>
   </view>
-  <view class="formview">
-    <form onSubmit="loginSubmit">
-      <view class="login">
-        <label class="type">登录名</label> <input placeholder="登录名" id="loginName" onBlur="keyInput" auto-focus />
+  <!-- 登录框 -->
+  <view class="login-form-container">
+    <view class="section form-content">
+      <form class="login-form" onSubmit="loginSubmit">
+      <view class="section form-section">
+        <label for="loginName" class="login-label name-label"></label>
+        <input name="loginName" id="loginName" placeholder="用户名" onInput="keyInput" auto-focus  value="{{loginName}}"/>
+        <view a:if="{{isShowClear}}" class="clear-label" onTap="clearUsername" ></view>
       </view>
-      <view class="login">
-        <label class="typepw">密码</label> <input type="text" id="password" placeholder="密码" onInput="keyInput" password />
+      <view class='line'></view> <!-- 分割线 -->
+      <view class="section form-section">
+        <label class="login-label pwd-label" for="password"></label>
+        <input a:if="{{isShowSeePwd}}" type="text" name="password" id="password" onInput="keyInput" placeholder="密码" value="{{password}}" />
+        <input a:if="{{!isShowSeePwd}}" password name="password" id="password" onInput="keyInput" placeholder="密码" value="{{password}}" />
+        <view a:if="{{isShowSeePwd}}"  class="see-pwd-label" onTab="showPWd" ></view>
+        <view a:if="{{!isShowSeePwd}}" class="not-see-pwd-label" onTab="showPWd" ></view>
       </view>
-       <view class="button-group">
-        <view class="viewbody">
-          <button type="primary" class="btn" size="mini" form-type="submit">登录</button>
-          <button type="ghost" class="btn" size="mini" form-type="reset">重置</button>
-        </view>
+      <view class="btn-area form-section">
+        <button form-type="submit" class="login-btn" type="primary">登录</button>
       </view>
-    </form>
-    
+      </form>
+    </view>
   </view>
-     
-</view>
-
-     
+  <!-- 底部元素 -->
+  <view class="login-footer">
+  </view>
+</view>     

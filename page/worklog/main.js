@@ -13,6 +13,7 @@ Page({
         select_date:'',
         select_data_time:'',
         today_time:'',
+        submit_flag:''
     },
     onLoad(options){
 
@@ -27,22 +28,24 @@ Page({
               globalDBUserId:DBUserId,
               globalDBUserName:DBUserName,
               globalDDUserName:DDUserName
-            })  
+            });
+            var today = new Date();
+            var today_time = today.getTime();
+            
+            var year = today.getFullYear();
+            var month = today.getMonth() + 1;
+            month = month <10 ? "0"+month : month;
+            var day = today.getDate();
+            day = day <10 ? "0"+day : day;
+            var today_d = year +"-"+ month +"-"+ day;
+            _this.setData({
+              select_date:today_d,
+              today_time:today_time
+            })
+            _this.queryFlag(); 
           }
         });
-      var today = new Date();
-      var today_time = today.getTime();
       
-      var year = today.getFullYear();
-      var month = today.getMonth() + 1;
-      month = month <10 ? "0"+month : month;
-      var day = today.getDate();
-      day = day <10 ? "0"+day : day;
-      var today_d = year +"-"+ month +"-"+ day;
-      _this.setData({
-        select_date:today_d,
-        today_time:today_time
-      })
     },
     
 
@@ -59,14 +62,48 @@ Page({
           var temp = res.date + " 00:00:00";
           var ddd = new Date(temp);
           var select_time = ddd.getTime();
-           _this.setData({
+          _this.setData({
               select_date:JSON.parse(JSON.stringify(res.date)),
               select_data_time:select_time,
-            })  
+          }),
+          _this.queryFlag();
         },
       });
     },
 
+    queryFlag(){
+      let _this = this;
+      dd.httpRequest({
+        method:'POST',
+        url: url+"/getWorklogParam.do",
+        datatype: "json",
+        data:{
+          userId: _this.data.globalDBUserId,
+          select_date: _this.data.select_date,
+        },
+        success:(res) => {
+          var flag = res.data.flag;
+          var text = '';
+          if(flag == 0){
+            text = '未填写';
+          }else if(flag == 1){
+            text = '已提交';
+          }else if(flag == 2){
+            text = '已补交';
+          }else if(flag == 3){
+            text = '未提交';
+          }
+          _this.setData({
+              submit_flag: text
+          })
+        },
+        fail: (err)=>{
+          console.log(err)
+        },
+        error:function(msg){
+        },
+      })
+    },
     worklogQuery(){
       if(this.data.today_time <= this.data.select_data_time){
         dd.alert({

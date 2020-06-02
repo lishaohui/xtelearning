@@ -10,6 +10,8 @@ Page({
         loginName:'',
         password:'',
         globalUserId:'',
+        isShowClear:false,
+        isShowSeePwd:false,
     },
     onLoad(){
         let _this = this;
@@ -116,12 +118,33 @@ Page({
     keyInput(e){
       switch(e.target.id){
         case 'loginName':
-            this.setData({loginName:e.detail.value});
+            var showflag = false;
+            if(e.detail.value==""){
+              showflag = false;
+            }else{
+              showflag = true;
+            }
+            this.setData({
+              loginName:e.detail.value,
+              isShowClear: showflag
+            });
             break;
         case 'password':
             this.setData({password:e.detail.value});
             break;
       }
-    },  
+    }, 
+    showPWd(e){
+      dd.alert({content:111});
+      this.setData({
+        isShowSeePwd: !(this.data.isShowSeePwd)
+      })
+    },
+    clearUsername(){
+      this.setData({
+        loginName:'',
+        isShowClear: false
+      });
+    } 
       
 })

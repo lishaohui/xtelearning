@@ -1,4 +1,4 @@
-<view class="detail-title">工作日志（{{worklogDate}}）</view>
+<view class="detail-title"><label class="worklog_title">工作日志（{{worklogDate}}）</label></view>
 <form onSubmit="saveWorklog">
 
   <view class="selfscore-item">
@@ -132,7 +132,7 @@
                       <button class="btn-bottom-delete" size="mini" type="ghost" data-name="{{worklogType}}" data-value="{{current_row}}" onTap="deleteLog">删除</button>
                       <button class="btn-bottom-save" size="mini" type="primary" form-type="submit" data-name="{{worklogType}}" data-value="{{current_row}}">保存</button>
                     </view>
-                    </form>
+                  </form>
                 </view>
             </view>
         </view>
@@ -147,7 +147,7 @@
 
   <view class="detail-btn-bottom">
     <button class="detail-btn-bottom-save" size="mini" type="primary" form-type="submit" data-name="save">保存</button>
-    <button class="detail-btn-bottom-submit" size="mini" type="primary" form-type="submit" data-name="submit" disabled="{{submit_diasbled}}">提交</button>
+    <button class="detail-btn-bottom-submit" size="mini" type="primary" form-type="{{formtype}}" data-name="submit" disabled="{{submit_diasbled}}">提交</button>
   </view>
 </form>
 
