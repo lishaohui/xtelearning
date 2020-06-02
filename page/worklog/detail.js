@@ -318,6 +318,7 @@ Page({
             content:res.data.msg,
             buttonText: '确定',
             success: (res) =>{
+              dd.reLaunch({url:'/page/worklog/main'})
             }
           })
           if(form_type=="submit"){

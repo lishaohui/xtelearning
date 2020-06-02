@@ -9,7 +9,8 @@ App({
     globalDDUserName:'',     //钉钉客户端登录用户姓名
     StorageDBUserId:'',
     //url:'http://localhost:8088/HR/dd'
-    url:'https://testhr.suntien.com/dd'
+    url:'http://manage.suntien.com:8080/HR/dd'
+    //url:'https://testhr.suntien.com/dd'
   },
   onLaunch(options) {
     //console.log('App Launch', options);
