@@ -14,11 +14,11 @@
       </view>
       <view class='line'></view> <!-- 分割线 -->
       <view class="section form-section">
-        <label class="login-label pwd-label" for="password"></label>
+        <label class="login-label pwd-label" for="password"></label>      
         <input a:if="{{isShowSeePwd}}" type="text" name="password" id="password" onInput="keyInput" placeholder="密码" value="{{password}}" />
         <input a:if="{{!isShowSeePwd}}" password name="password" id="password" onInput="keyInput" placeholder="密码" value="{{password}}" />
-        <view a:if="{{isShowSeePwd}}"  class="see-pwd-label" onTab="showPWd" ></view>
-        <view a:if="{{!isShowSeePwd}}" class="not-see-pwd-label" onTab="showPWd" ></view>
+        <view a:if="{{isShowSeePwd}}"  class="see-pwd-label" onTap="showPWd" ></view>
+        <view a:if="{{!isShowSeePwd}}" class="not-see-pwd-label" onTap="showPWd" ></view>
       </view>
       <view class="btn-area form-section">
         <button form-type="submit" class="login-btn" type="primary">登录</button>

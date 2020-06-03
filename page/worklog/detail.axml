@@ -109,7 +109,7 @@
                                 <label><label style="font-color:red;font-weight:bold;">*</label> 计划工作内容</label>
                             </view>
                             <view class="clist-item-content">
-                                <textarea class="clist-item-content-content" name="template_log1" maxlength='-1' auto-height="true" placeholder="请填写计划工作内容" value="{{worklogList2[current_row-1].log1}}"></textarea>
+                                <textarea class="clist-item-content-content" name="template_log1" maxlength='-1' auto-height="true" placeholder="请填写计划工作内容" value="{{worklogList2[current_row-1].log1}}" focus="{{true}}"></textarea>
                             </view>
                         </view>
                         <view  class="clist-item">

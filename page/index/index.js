@@ -134,10 +134,14 @@ Page({
             break;
       }
     }, 
-    showPWd(e){
-      dd.alert({content:111});
+    showPWd(){
+      var flag = this.data.isShowSeePwd;
+      var flag1 = true;
+      if(flag == true){
+        flag1 = false;
+      }
       this.setData({
-        isShowSeePwd: !(this.data.isShowSeePwd)
+        isShowSeePwd:flag1
       })
     },
     clearUsername(){
