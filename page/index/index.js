@@ -1,154 +1,127 @@
 let app = getApp();
 let url = app.globalData.url;
 
+
 Page({
     data:{
-        authCode:'',
-        access_token:'',
         userId:'',
-        userName:'',
-        loginName:'',
-        password:'',
-        globalUserId:'',
-        isShowClear:false,
-        isShowSeePwd:false,
+        oauserid:'',
+        eurl:''
     },
     onLoad(){
         let _this = this;
-    },
+        dd.getStorage({
+          key:'XTelearning',
+          success(res){
+            if(res.data==null){//如果在用户移动端缓存中没有查到信息，则通过钉钉接口查找个人信息
+              var authCode = '';
+              var access_token = '';
+              var userId = '';
+              var oauserid = '';
+              // 获取免登授权码
+              dd.getAuthCode({
+                success:(res) =>{
+                  authCode = res.authCode;
+                  console.log("authCode:"+authCode);
+                  // 根据appkey和appSecret获取 access_token 
+                  dd.httpRequest({
+                    url: 'https://oapi.dingtalk.com/gettoken?appkey=ding59fxrqrch4o9xmjs&appsecret=bQTa3UgRSuExh5e5h6apzZaIcWWsxze91hRphTkmM-x_DPU8JXfrklGU0O8fg5OU',
+                    success: res => {
+                      access_token = res.data.access_token;
+                      console.log("access_token"+access_token);
+                      // 根据access_token获取userId
+                      dd.httpRequest({
+                        url: 'https://oapi.dingtalk.com/user/getuserinfo?access_token=' +access_token + '&code=' + authCode,
+                        success: res => {
+                          userId = res.data.userid;
+                          console.log(userId);
+                          _this.setData({
+                            userId:userId
+                          }),
+                          //获取用户详情
+                          dd.httpRequest({
+                            url: 'http://47.95.3.208:956/interface/XTgetOAandDDUserId.jsp?dduserid=' + userId,
+                            success: function(res) {
+                              var result = res.data;
+                              oauserid = result.oauserid;
+                              console.log(oauserid);
+                              _this.setData({
+                                oauserid:oauserid
+                              });
+                              dd.httpRequest({
+                                url: url + "/getElearningNameByOAid.do",
+                                method: 'POST',
+                                data: 'oauserid='+oauserid,
+                                dataType: 'json',
+                                success: function(res) {
+                                  var result = res.data;
+                                  var ename =  result.elearningname;
+                                  if(ename==null){
 
-    loginSubmit(){
-      var loginName = this.data.loginName;
-      var password = this.data.password;
-      if(loginName ==""){
-        dd.showToast({
-          content:'用户名不能为空！',
-          type:'text',
-          timer:1500,
-          color:'#fff',
-          success:() =>console.log('用户名不能为空')
-        })
-        return;
-      }else if(password ==""){
-        dd.showToast({
-          content:'密码不能为空！',
-          type:'text',
-          timer:1500,
-          color:'#fff',
-          success:() =>console.log('密码不能为空')
-        })
-        return;
-      }
-
-      dd.showLoading({
-        content:'登录中...',
-      });
-
-      dd.getAuthCode({
-        success:(res) =>{
-          this.setData({authCode:res.authCode})
-          dd.httpRequest({
-            url: url+"/HRlogin.do",
-            method: 'POST',
-            dataType: 'json',
-            data:{
-              loginName:loginName,
-              password:password,
-              authCode:res.authCode,
-            },
-            success: (res) => {
-              dd.showToast({
-                content:"登录成功！",
-                timer:1000,
-              });
-              var status = res.status;
-              //console.log('success----',status);
-              if(status == 200){
-                let DBUserId = res.data.result.DBUserId;
-                let DDUserName = res.data.result.DDUserName;
-
-                app.globalData.globalDBUserId = DBUserId;
-                app.globalData.globalDBUserName = loginName;
-                app.globalData.globalDDUserName = DDUserName;
-
-                dd.setStorage({
-                  key:'storageHR',
-                  data:{
-                    DBUserId:DBUserId,
-                    DBUserName:loginName,
-                    DDUserName:DDUserName
-                  },
-                  success:(res) =>{
-                    dd.redirectTo({url:'/page/worklog/main'})
-                  },
-                  fail:(res)=>{
-                  },
-                  complete:(res)=>{
-                  }
-                })
-              }
-            },
-            fail: (res) => {
-              dd.hideLoading();
-              console.log("httpRequestFail---",res)
-              dd.alert({
-                content:"用户名或密码错误，请重新登录",
-                success:() =>{
-                  dd.reLaunch({
-                    url:'/page/index/index',
+                                  }else{
+                                    dd.setStorage({
+                                      key: 'XTelearning',
+                                      data: {
+                                        ename: ename,
+                                        oauserid:oauserid
+                                      }
+                                    });
+                                    _this.redirectToElearning(ename,oauserid);
+                                  }
+                                }
+                              })
+                            }
+                          })
+                        },
+                        fail: function(err) {
+                          console.log(err)
+                        }
+                      })
+                    },
+                    fail: function(err) {
+                      console.log(err)
+                    }
                   })
-                }
-              });
-            },
-            complete: (res) => {
-              dd.hideLoading();
-            }           
-          });
-        },
-        fail:(res) =>{
-          console.log("httpRequestFail---",res)
-          dd.alert({content: JSON.stringify(res)});
-        },
-        complete:(res) =>{
-        }
-        
-      })
-      
-    },
-    keyInput(e){
-      switch(e.target.id){
-        case 'loginName':
-            var showflag = false;
-            if(e.detail.value==""){
-              showflag = false;
-            }else{
-              showflag = true;
+                } 
+              }) 
             }
-            this.setData({
-              loginName:e.detail.value,
-              isShowClear: showflag
-            });
-            break;
-        case 'password':
-            this.setData({password:e.detail.value});
-            break;
-      }
-    }, 
-    showPWd(){
-      var flag = this.data.isShowSeePwd;
-      var flag1 = true;
-      if(flag == true){
-        flag1 = false;
-      }
-      this.setData({
-        isShowSeePwd:flag1
+            else{ //如果从缓存中读到
+              if(res.data.ename==null){
+              }else{
+                _this.redirectToElearning(res.data.ename,res.data.oauserid);
+              }
+            }
+          },
+          fail(res){
+            console.log(res);
+          }
+        })
+    },
+
+    redirectToElearning(ename,oauserid){
+      let _this = this;
+      dd.httpRequest({
+        url: url + "/getDESresult.do",
+        method: 'POST',
+        data: {
+          'data':encodeURIComponent(ename),
+          'password':encodeURIComponent('Xtzhc@956')
+        },
+        dataType:'json',
+        success: function(res) {
+          var result = res.data;
+          // console.log("加密后"+result.result);
+          // console.log("加密后转码"+result.result_utf);
+          // console.log(encodeURIComponent(result.result));
+          // console.log("oauserid:"+oauserid);
+          var eurl = "http://wxtest.chinaedu.com/sfs/volcano/suntienTest/#/suntienRedirect?token="+encodeURIComponent(result.result)+"&oauserid="+oauserid;
+          // console.log(eurl);
+          _this.setData({
+            eurl:eurl
+          })
+        }
       })
     },
-    clearUsername(){
-      this.setData({
-        loginName:'',
-        isShowClear: false
-      });
-    } 
-      
+    
+
 })

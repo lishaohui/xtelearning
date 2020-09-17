@@ -1,15 +1,11 @@
 {
   "pages": [
-    "page/index/index",
-    "page/index/main",
-    "page/worklog/main",
-    "page/worklog/detail"
-
+    "page/index/index"
   ],
   "window": {
     "enableWK": "YES",
     "enableDSL": true,
-    "defaultTitle": "新天人资",
+    "defaultTitle": "新天网络课堂",
     "backgroundColor": "#F5F5F9",
     "pullRefresh": false,
     "allowsBounceVertical": true
