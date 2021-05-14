@@ -110,12 +110,11 @@ Page({
         dataType:'json',
         success: function(res) {
           var result = res.data;
-          // console.log("加密后"+result.result);
-          // console.log("加密后转码"+result.result_utf);
-          // console.log(encodeURIComponent(result.result));
-          // console.log("oauserid:"+oauserid);
-          var eurl = "http://wxtest.chinaedu.com/sfs/volcano/suntienTest/#/suntienRedirect?token="+encodeURIComponent(result.result)+"&oauserid="+oauserid;
-          // console.log(eurl);
+          //console.log("加密后"+result.result);
+          //console.log("加密后转码"+result.result_utf);
+          //console.log(encodeURIComponent(result.result));
+          //console.log("oauserid:"+oauserid);
+          var eurl = "https://wechat.chinaedu.net/#/suntienRedirect?token="+encodeURIComponent(result.result)+"&oauserid="+oauserid;
           _this.setData({
             eurl:eurl
           })

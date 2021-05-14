@@ -3,7 +3,7 @@ App({
     domain:'',
     corpId:'',
     token:"",
-    url:'http://manage.suntien.com:8080/HR/dd',
+    url:'http://manage.suntien.com:7926/HR/dd',
     //url:'http://testhr.suntien.com/dd'
   },
   onLaunch(options) {
